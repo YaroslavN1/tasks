@@ -1,20 +1,11 @@
 <template>
-  <div>
-    <v-btn @click="storeTasks.decrement()">
-      Decrease counter
-    </v-btn>
-
-    <v-chip
-      variant="outlined"
-      class="px-4 mx-4"
-    >
-      {{ storeTasks.count }}
-    </v-chip>
-
-    <v-btn @click="storeTasks.increment()">
-      Increase counter
-    </v-btn>
-  </div>
+  <v-app>
+    <v-content>
+      <main>
+        <ViewTasks/>
+      </main>
+    </v-content>
+  </v-app>
 </template>
 
 <script setup>
@@ -23,11 +14,18 @@
 */
 
   import {useStoreTasks} from '@/stores/storeTasks'
+  import ViewTasks from '@/views/ViewTasks.vue'
 
 /*
   stores
 */
 
   const storeTasks = useStoreTasks()
+
+/*
+  load tasks to store
+*/
+
+  storeTasks.init()
 
 </script>
