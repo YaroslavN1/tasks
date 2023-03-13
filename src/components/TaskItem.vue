@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    {{ props.task.name }}
+    {{ props.task.id }} {{ props.task.name }}
   </v-card>
 </template>
 

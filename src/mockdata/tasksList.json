@@ -1,7 +1,7 @@
 [{
   "id": 1,
   "category": "Active",
-  "name": "Task title (dowolny tekst)",
+  "name": "Task title",
   "type": "Tasks",
   "task_tab": "Marketing",
   "active_from": "10 May 2022",
@@ -12,7 +12,7 @@
 }, {
   "id": 2,
   "category": "Active",
-  "name": "Task title (dowolny tekst)",
+  "name": "Task title",
   "type": "Tasks",
   "task_tab": "Marketing",
   "active_from": "10 May 2022",
@@ -23,7 +23,7 @@
 }, {
   "id": 3,
   "category": "Active",
-  "name": "Task title (dowolny tekst)",
+  "name": "Task title",
   "type": "Tasks",
   "task_tab": "Marketing",
   "active_from": "10 May 2022",
@@ -34,7 +34,7 @@
 }, {
   "id": 4,
   "category": "Active",
-  "name": "Task title (dowolny tekst)",
+  "name": "Task title",
   "type": "Tasks",
   "task_tab": "Marketing",
   "active_from": "10 May 2022",
@@ -45,7 +45,7 @@
 }, {
   "id": 5,
   "category": "Active",
-  "name": "Task title (dowolny tekst)",
+  "name": "Task title",
   "type": "Tasks",
   "task_tab": "Marketing",
   "active_from": "10 May 2022",
@@ -56,7 +56,7 @@
 }, {
   "id": 6,
   "category": "Active",
-  "name": "Task title (dowolny tekst)",
+  "name": "Task title",
   "type": "Tasks",
   "task_tab": "Marketing",
   "active_from": "10 May 2022",
@@ -67,7 +67,7 @@
 }, {
   "id": 7,
   "category": "Active",
-  "name": "Task title (dowolny tekst)",
+  "name": "Task title",
   "type": "Tasks",
   "task_tab": "Marketing",
   "active_from": "10 May 2022",
@@ -78,7 +78,7 @@
 }, {
   "id": 8,
   "category": "Active",
-  "name": "Task title (dowolny tekst)",
+  "name": "Task title",
   "type": "Tasks",
   "task_tab": "Marketing",
   "active_from": "10 May 2022",
