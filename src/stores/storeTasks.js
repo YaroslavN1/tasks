@@ -1,16 +1,11 @@
 import { defineStore } from 'pinia'
+import tasksList from '@/mockdata/tasksList.json'
 
 export const useStoreTasks = defineStore('storeTasks', {
-  state: () => ({ count: 0, name: 'Eduardo' }),
+  state: () => ({ tasksList: []}),
   actions: {
-    increment() {
-      this.count++
-    },
-    decrement() {
-      this.count--
+    init() {
+      this.tasksList = tasksList
     }
-  },
-  getters: {
-    doubleCount: (state) => state.count * 2,
-  },
+  }
 })
