@@ -9,11 +9,12 @@
             v-model="selectedTab"
             color="green-lighten-1"
             align-tabs="start"
-          >
-            <v-tab :value="1">All</v-tab>
-            <v-tab :value="2">Active</v-tab>
-            <v-tab :value="3">Pending</v-tab>
-            <v-tab :value="4">Archived</v-tab>
+            >
+          
+            <v-tab class="tab-border" :value="1">All</v-tab>
+            <v-tab class="tab-border" :value="2">Active</v-tab>
+            <v-tab class="tab-border" :value="3">Pending</v-tab>
+            <v-tab class="tab-border" :value="4">Archived</v-tab>
           </v-tabs>
 
           <v-spacer></v-spacer>
@@ -28,13 +29,14 @@
       />
       <div class="d-flex justify-end">
         <v-pagination
-          border
-          density="comfortable"
           v-model="page"
-          :length="15"
-          :total-visible="7"
+          :length="4"
+          :total-visible="4"
+          variant="outlined"
+          class="borderless-tabs"
+          density="compact"
           color="green-lighten-1"
-        ></v-pagination>
+        />
       </div>
     </v-container>
 </template>
@@ -74,3 +76,14 @@
   const searchByName = ref('')
 
 </script>
+
+<style scoped>
+.tab-border:not(.v-tab--selected) {
+  border-bottom: solid lightgrey 2px
+}
+
+.borderless-tabs:first-child{
+  border: unset
+}
+
+</style>
