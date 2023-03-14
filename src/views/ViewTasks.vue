@@ -23,7 +23,7 @@
       </v-container>
 
       <TaskItem
-        v-for="task in storeTasks.tasksList"
+        v-for="task in storeTasks.getFormattedTasks"
         :key="task.id"
         :task="task"
       />
@@ -48,8 +48,8 @@
 */
 
   import { ref } from 'vue'
+  import { useStoreTasks } from '@/stores/storeTasks'
   import TaskItem from '@/components/TaskItem.vue'
-  import {useStoreTasks} from '@/stores/storeTasks'
 
 /*
   stores
