@@ -3,8 +3,6 @@
       <div>
         Tasks
       </div>
-      <!-- {{ storeTasks.getFilteredTasks(selectedTab, searchByName) }} -->
-      {{ searchByName }}
 
       <v-container class="d-flex flex-row justify-space-between px-0">
           <v-tabs
@@ -48,7 +46,6 @@
 /*
   imports
 */
-
   import { ref } from 'vue'
   import { useStoreTasks } from '@/stores/storeTasks'
   import TaskItem from '@/components/TaskItem.vue'
@@ -56,26 +53,22 @@
 /*
   stores
 */
-
   const storeTasks = useStoreTasks()
 
 /*
   tabs
 */
-
   const selectedTab = ref('All')
-   
-/*
-  page
-*/
-
-  const page = ref()
 
 /*
   search
 */
-
   const searchByName = ref('')
+
+/*
+  page
+*/
+  const page = ref()
 
 </script>
 

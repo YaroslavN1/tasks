@@ -15,24 +15,33 @@
         </p>
       </v-list-item>
 
-      <v-list
-        class="d-flex flex-row py-0"
-        lines="one"
+      <v-spacer></v-spacer>
+
+      <v-list-item
+        v-for="(value, key) in taskDetails"
+        :key="key"
       >
-        <v-list-item
-          v-for="(value, key) in taskDetails"
-          :key="key"
+          <p>
+            {{ formatDetail(key) }}
+          </p>
+
+          <p>
+            {{ value }}
+          </p>
+
+      </v-list-item>
+
+      <v-spacer></v-spacer>
+
+      <v-list-item>
+        <v-btn
+          @click="storeTasks.addIdToHide(task.id)"
+          variant="plain"
+          size="small"
         >
-            <p>
-              {{ formatDetail(key) }}
-            </p>
-
-            <p>
-              {{ value }}
-            </p>
-
-        </v-list-item>
-      </v-list>
+          <v-icon icon="mdi-close" size="large"></v-icon>
+        </v-btn>
+      </v-list-item>
 
     </v-list>
   </v-card>
@@ -41,12 +50,25 @@
 <script setup>
 
 /*
+  imports
+*/
+  import { useStoreTasks } from '@/stores/storeTasks'
+
+/*
+  stores
+*/
+  const storeTasks = useStoreTasks()
+
+
+/*
   props
 */
 
   const props = defineProps({
-    task: Object,
+    task: {
+    type: Object,
     required: true
+    }
   })
 
 /*
@@ -59,7 +81,6 @@
   
   taskDetails.responses = `${taskDetails.responses}/${taskDetails.responses_total}`
   delete taskDetails.responses_total
-  console.log(taskDetails)
 /*
   formatting details
 */
