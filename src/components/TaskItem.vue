@@ -20,15 +20,15 @@
         lines="one"
       >
         <v-list-item
-          v-for="item in taskDetails"
-          :key="item[0]"
+          v-for="(value, key) in taskDetails"
+          :key="key"
         >
             <p>
-              {{ formatDetail(item[0]) }}
+              {{ formatDetail(key) }}
             </p>
 
             <p>
-              {{ item[1] }}
+              {{ value }}
             </p>
 
         </v-list-item>
@@ -49,6 +49,21 @@
     required: true
   })
 
+/*
+  task details separating and formatting
+*/
+
+  let taskDetails = Object.entries(props.task)
+  taskDetails.splice(0, 3)
+  taskDetails = Object.fromEntries(taskDetails)
+  
+  taskDetails.responses = `${taskDetails.responses}/${taskDetails.responses_total}`
+  delete taskDetails.responses_total
+  console.log(taskDetails)
+/*
+  formatting details
+*/
+
   const formatDetail = (string) => {
     let detail = string.replace(/_/g, " ")
     const firstLetter = detail.charAt(0).toUpperCase()
@@ -56,11 +71,5 @@
     detail = firstLetter + subString
     return detail
   }
-/*
-  task object to entries
-*/
-
-  const taskDetails = Object.entries(props.task).slice(3)
-
 
 </script>
