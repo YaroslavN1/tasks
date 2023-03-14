@@ -3,6 +3,8 @@
       <div>
         Tasks
       </div>
+      <!-- {{ storeTasks.getFilteredTasks(selectedTab, searchByName) }} -->
+      {{ searchByName }}
 
       <v-container class="d-flex flex-row justify-space-between px-0">
           <v-tabs
@@ -11,10 +13,10 @@
             align-tabs="start"
             >
           
-            <v-tab class="tab-border" :value="1">All</v-tab>
-            <v-tab class="tab-border" :value="2">Active</v-tab>
-            <v-tab class="tab-border" :value="3">Pending</v-tab>
-            <v-tab class="tab-border" :value="4">Archived</v-tab>
+            <v-tab class="tab-border" value="All">All</v-tab>
+            <v-tab class="tab-border" value="Active">Active</v-tab>
+            <v-tab class="tab-border" value="Pending">Pending</v-tab>
+            <v-tab class="tab-border" value="Archived">Archived</v-tab>
           </v-tabs>
 
           <v-spacer></v-spacer>
@@ -23,7 +25,7 @@
       </v-container>
 
       <TaskItem
-        v-for="task in storeTasks.getFormattedTasks"
+        v-for="task in storeTasks.getFilteredTasks(selectedTab, searchByName)"
         :key="task.id"
         :task="task"
       />
@@ -61,13 +63,13 @@
   tabs
 */
 
-  const selectedTab = ref(null)
-
+  const selectedTab = ref('All')
+   
 /*
   page
 */
 
-  const page = ref(null)
+  const page = ref()
 
 /*
   search
