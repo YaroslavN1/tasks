@@ -5,13 +5,13 @@
         <v-chip
           label
         >
-          {{ task.Category }}
+          {{ task.category }}
         </v-chip>
       </v-list-item>
 
       <v-list-item>
         <p>
-          {{ task.Name }}
+          {{ task.name }}
         </p>
       </v-list-item>
 
@@ -24,8 +24,9 @@
           :key="item[0]"
         >
             <p>
-              {{ item[0] }}
+              {{ formatDetail(item[0]) }}
             </p>
+
             <p>
               {{ item[1] }}
             </p>
@@ -48,10 +49,18 @@
     required: true
   })
 
+  const formatDetail = (string) => {
+    let detail = string.replace(/_/g, " ")
+    const firstLetter = detail.charAt(0).toUpperCase()
+    const subString = detail.slice(1)
+    detail = firstLetter + subString
+    return detail
+  }
 /*
   task object to entries
 */
 
   const taskDetails = Object.entries(props.task).slice(3)
+
 
 </script>
