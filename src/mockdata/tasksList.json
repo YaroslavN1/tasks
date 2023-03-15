@@ -27,7 +27,7 @@
   "type": "Tasks",
   "task_tab": "Marketing",
   "active_from": "10 May 2022",
-  "active_to": "17 Sep 2023",
+  "active_to": "unset",
   "responses": 7,
   "responses_total": 7,
   "author": "Rebecca Smith"
@@ -71,7 +71,7 @@
   "type": "Tasks",
   "task_tab": "Pruction",
   "active_from": "8 May 2022",
-  "active_to": "25 Sep 2023",
+  "active_to": "unset",
   "responses": 5,
   "responses_total": 10,
   "author": "Aaron Smith"
