@@ -6,6 +6,7 @@
 
       <v-container class="d-flex flex-row justify-space-between px-0">
           <v-tabs
+            @click="storeTasks.setCurrentPage(1)"
             v-model="selectedTab"
             color="green-lighten-1"
             align-tabs="start"
@@ -19,7 +20,12 @@
 
           <v-spacer></v-spacer>
 
-          <v-text-field v-model="searchByName" label="Search by name..." variant="outlined"></v-text-field>
+          <v-text-field
+            @input="storeTasks.setCurrentPage(1)"
+            v-model="searchByName"
+            label="Search by name..."
+            variant="outlined"
+          />
       </v-container>
 
       <TaskItem
@@ -27,6 +33,7 @@
         :key="task.id"
         :task="task"
       />
+
       <div class="d-flex justify-end">
         <v-pagination
           v-model="currentPage"
@@ -46,6 +53,7 @@
 /* imports */
 
   import { ref } from 'vue'
+  import { storeToRefs } from 'pinia'
   import { useStoreTasks } from '@/stores/storeTasks'
   import TaskItem from '@/components/TaskItem.vue'
 
@@ -61,9 +69,9 @@
 
   const searchByName = ref('')
 
-/* page */
+/* current page */
 
-  const currentPage = ref(1)
+  const { currentPage } = storeToRefs(storeTasks)
 
 </script>
 

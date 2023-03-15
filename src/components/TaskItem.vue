@@ -5,7 +5,6 @@
         width="380px"
         class="d-flex flex-row"
       >
-      {{ task.id }}
         <v-list-item min-width="130px">
           <v-chip
             variant="elevated"
