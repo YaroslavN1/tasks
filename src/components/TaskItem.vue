@@ -5,11 +5,12 @@
         width="380px"
         class="d-flex flex-row"
       >
-        <v-list-item min-width="110px">
+        <v-list-item min-width="130px">
           <v-chip
+            variant="elevated"
+            :color="chipColor()"
             label
-            class="d-flex justify-center"
-            style="width: 100px"
+            class="d-flex justify-center category-chip"
           >
             {{ task.category }}
           </v-chip>
@@ -32,7 +33,11 @@
           <p>{{ value }}</p>
         </v-list-item>
         
-        <v-divider v-if="index !== Object.keys(taskDetails).length-1" vertical></v-divider>
+        <v-divider
+          v-if="index !== Object.keys(taskDetails).length-1"
+          inset
+          vertical
+        ></v-divider>
 
       </v-list>
         
@@ -54,19 +59,16 @@
 
 <script setup>
 
-/*
-  imports
-*/
+/* imports */
+
   import { useStoreTasks } from '@/stores/storeTasks'
 
-/*
-  stores
-*/
+/* stores */
+
   const storeTasks = useStoreTasks()
 
-/*
-  props
-*/
+/* props */
+
   const props = defineProps({
     task: {
     type: Object,
@@ -74,17 +76,15 @@
     }
   })
 
-/*
-  task details separating and formatting
-*/
+/* task details separating and formatting */
+
   const taskDetails = Object.fromEntries(Object.entries(props.task).splice(3))
   
   taskDetails.responses = `${taskDetails.responses}/${taskDetails.responses_total}`
   delete taskDetails.responses_total
 
-/*
-  formatting details
-*/
+/* formatting details */
+
   const formatDetail = (string) => {
     let detail = string.replace(/_/g, " ")
     const firstLetter = detail.charAt(0).toUpperCase()
@@ -93,10 +93,28 @@
     return detail
   }
 
+/* chip color change */
+
+  const chipColor = () => {
+    if(props.task.category === 'Active') {
+      return 'success'
+    }
+    else if (props.task.category === 'Pending'){
+      return 'info'
+    }
+    else { 
+      return ''
+    }
+  }
+
 </script>
 
 <style scoped>
 .task-card {
   box-shadow: 2px 2px 10px rgb(230, 230, 230)
+}
+.category-chip {
+  opacity: .75;
+  filter: saturate(1.2);
 }
 </style>
