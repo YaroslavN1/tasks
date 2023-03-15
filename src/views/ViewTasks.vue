@@ -23,15 +23,16 @@
       </v-container>
 
       <TaskItem
-        v-for="task in storeTasks.getFilteredTasks(selectedTab, searchByName)"
+        v-for="task in storeTasks.getPaginatedTasks(selectedTab, searchByName)"
         :key="task.id"
         :task="task"
       />
       <div class="d-flex justify-end">
         <v-pagination
-          v-model="page"
-          :length="4"
-          :total-visible="4"
+          v-model="currentPage"
+          @click="storeTasks.setCurrentPage(currentPage)"
+          :length="storeTasks.getPaginationLength(selectedTab, searchByName)"
+          :total-visible="5"
           variant="outlined"
           class="borderless-tabs"
           density="compact"
@@ -43,32 +44,27 @@
 
 <script setup>
 
-/*
-  imports
-*/
+/* imports */
+
   import { ref } from 'vue'
   import { useStoreTasks } from '@/stores/storeTasks'
   import TaskItem from '@/components/TaskItem.vue'
 
-/*
-  stores
-*/
+/* stores */
+
   const storeTasks = useStoreTasks()
 
-/*
-  tabs
-*/
+/* tabs */
+
   const selectedTab = ref('All')
 
-/*
-  search
-*/
+/* search */
+
   const searchByName = ref('')
 
-/*
-  page
-*/
-  const page = ref()
+/* page */
+
+  const currentPage = ref(1)
 
 </script>
 
