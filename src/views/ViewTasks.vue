@@ -34,7 +34,6 @@
           :length="storeTasks.getPaginationLength(selectedTab, searchByName)"
           :total-visible="5"
           variant="outlined"
-          class="borderless-tabs"
           density="compact"
           color="green-lighten-1"
         />
@@ -71,10 +70,6 @@
 <style scoped>
 .tab-border:not(.v-tab--selected) {
   border-bottom: solid lightgrey 2px
-}
-
-.borderless-tabs:first-child{
-  border: unset
 }
 
 </style>
