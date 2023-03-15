@@ -6,6 +6,7 @@
 
       <v-container class="d-flex flex-row justify-space-between px-0">
           <v-tabs
+            @click="storeTasks.setCurrentPage(1)"
             v-model="selectedTab"
             color="green-lighten-1"
             align-tabs="start"
@@ -19,21 +20,27 @@
 
           <v-spacer></v-spacer>
 
-          <v-text-field v-model="searchByName" label="Search by name..." variant="outlined"></v-text-field>
+          <v-text-field
+            @input="storeTasks.setCurrentPage(1)"
+            v-model="searchByName"
+            label="Search by name..."
+            variant="outlined"
+          />
       </v-container>
 
       <TaskItem
-        v-for="task in storeTasks.getFilteredTasks(selectedTab, searchByName)"
+        v-for="task in storeTasks.getPaginatedTasks(selectedTab, searchByName)"
         :key="task.id"
         :task="task"
       />
+
       <div class="d-flex justify-end">
         <v-pagination
-          v-model="page"
-          :length="4"
-          :total-visible="4"
+          v-model="currentPage"
+          @click="storeTasks.setCurrentPage(currentPage)"
+          :length="storeTasks.getPaginationLength(selectedTab, searchByName)"
+          :total-visible="5"
           variant="outlined"
-          class="borderless-tabs"
           density="compact"
           color="green-lighten-1"
         />
@@ -43,42 +50,34 @@
 
 <script setup>
 
-/*
-  imports
-*/
+/* imports */
+
   import { ref } from 'vue'
+  import { storeToRefs } from 'pinia'
   import { useStoreTasks } from '@/stores/storeTasks'
   import TaskItem from '@/components/TaskItem.vue'
 
-/*
-  stores
-*/
+/* stores */
+
   const storeTasks = useStoreTasks()
 
-/*
-  tabs
-*/
+/* tabs */
+
   const selectedTab = ref('All')
 
-/*
-  search
-*/
+/* search */
+
   const searchByName = ref('')
 
-/*
-  page
-*/
-  const page = ref()
+/* current page */
+
+  const { currentPage } = storeToRefs(storeTasks)
 
 </script>
 
 <style scoped>
 .tab-border:not(.v-tab--selected) {
   border-bottom: solid lightgrey 2px
-}
-
-.borderless-tabs:first-child{
-  border: unset
 }
 
 </style>
