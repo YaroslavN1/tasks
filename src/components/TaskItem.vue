@@ -1,37 +1,42 @@
 <template>
-  <v-card>
-    <v-list class="d-flex flex-row">
-      <v-list-item>
-        <v-chip
-          label
-        >
-          {{ task.category }}
-        </v-chip>
-      </v-list-item>
-
-      <v-list-item>
-        <p>
-          {{ task.name }}
-        </p>
-      </v-list-item>
-
-      <v-spacer></v-spacer>
-
-      <v-list-item
-        v-for="(value, key) in taskDetails"
-        :key="key"
+  <v-card class="mb-4 task-card" flat>
+    <v-list class="d-flex py-0">
+      <v-list
+        width="380px"
+        class="d-flex flex-row"
       >
-          <p>
-            {{ formatDetail(key) }}
-          </p>
+        <v-list-item min-width="110px">
+          <v-chip
+            label
+            class="d-flex justify-center"
+            style="width: 100px"
+          >
+            {{ task.category }}
+          </v-chip>
+        </v-list-item>
+        
+        <v-list-item class="pl-2">
+          <p>{{ task.name }}</p>
+        </v-list-item>
+      </v-list>
 
-          <p>
-            {{ value }}
-          </p>
+      <v-list
+        v-for="(value, key, index) in taskDetails"
+        :key="key"
+        class="d-flex"
+      >
+        <v-list-item
+          :min-width="index === 0 ? '90' : '110'"
+        >
+          <p>{{ formatDetail(key) }}</p>
+          <p>{{ value }}</p>
+        </v-list-item>
+        
+        <v-divider v-if="index !== Object.keys(taskDetails).length-1" vertical></v-divider>
 
-      </v-list-item>
-
-      <v-spacer></v-spacer>
+      </v-list>
+        
+        <v-spacer></v-spacer>
 
       <v-list-item>
         <v-btn
@@ -59,11 +64,9 @@
 */
   const storeTasks = useStoreTasks()
 
-
 /*
   props
 */
-
   const props = defineProps({
     task: {
     type: Object,
@@ -74,17 +77,14 @@
 /*
   task details separating and formatting
 */
-
-  let taskDetails = Object.entries(props.task)
-  taskDetails.splice(0, 3)
-  taskDetails = Object.fromEntries(taskDetails)
+  const taskDetails = Object.fromEntries(Object.entries(props.task).splice(3))
   
   taskDetails.responses = `${taskDetails.responses}/${taskDetails.responses_total}`
   delete taskDetails.responses_total
+
 /*
   formatting details
 */
-
   const formatDetail = (string) => {
     let detail = string.replace(/_/g, " ")
     const firstLetter = detail.charAt(0).toUpperCase()
@@ -94,3 +94,9 @@
   }
 
 </script>
+
+<style scoped>
+.task-card {
+  box-shadow: 2px 2px 10px rgb(230, 230, 230)
+}
+</style>
