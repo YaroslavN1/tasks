@@ -27,10 +27,11 @@
         class="d-flex"
       >
         <v-list-item
-          :min-width="index === 0 ? '90' : '110'"
+          :min-width="index === 0 ? '90' : index === 1 ? '110' : '125'"
         >
-          <p>{{ formatDetail(key) }}</p>
-          <p>{{ value }}</p>
+          <p>{{ formatDetailLabel(key) }}</p>
+          <p v-if="value !== 'unset'" >{{ value }}</p>
+          <v-icon v-else icon="mdi-infinity" size="x-small"></v-icon>
         </v-list-item>
         
         <v-divider
@@ -85,7 +86,7 @@
 
 /* formatting details */
 
-  const formatDetail = (string) => {
+  const formatDetailLabel = (string) => {
     let detail = string.replace(/_/g, " ")
     const firstLetter = detail.charAt(0).toUpperCase()
     const subString = detail.slice(1)
