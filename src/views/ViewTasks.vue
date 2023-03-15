@@ -11,10 +11,10 @@
             align-tabs="start"
             >
           
-            <v-tab class="tab-border" :value="1">All</v-tab>
-            <v-tab class="tab-border" :value="2">Active</v-tab>
-            <v-tab class="tab-border" :value="3">Pending</v-tab>
-            <v-tab class="tab-border" :value="4">Archived</v-tab>
+            <v-tab class="tab-border" value="All">All</v-tab>
+            <v-tab class="tab-border" value="Active">Active</v-tab>
+            <v-tab class="tab-border" value="Pending">Pending</v-tab>
+            <v-tab class="tab-border" value="Archived">Archived</v-tab>
           </v-tabs>
 
           <v-spacer></v-spacer>
@@ -23,7 +23,7 @@
       </v-container>
 
       <TaskItem
-        v-for="task in storeTasks.tasksList"
+        v-for="task in storeTasks.getFilteredTasks(selectedTab, searchByName)"
         :key="task.id"
         :task="task"
       />
@@ -46,34 +46,29 @@
 /*
   imports
 */
-
   import { ref } from 'vue'
+  import { useStoreTasks } from '@/stores/storeTasks'
   import TaskItem from '@/components/TaskItem.vue'
-  import {useStoreTasks} from '@/stores/storeTasks'
 
 /*
   stores
 */
-
   const storeTasks = useStoreTasks()
 
 /*
   tabs
 */
-
-  const selectedTab = ref(null)
-
-/*
-  page
-*/
-
-  const page = ref(null)
+  const selectedTab = ref('All')
 
 /*
   search
 */
-
   const searchByName = ref('')
+
+/*
+  page
+*/
+  const page = ref()
 
 </script>
 
