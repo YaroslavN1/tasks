@@ -1,10 +1,8 @@
 <template>
   <v-app>
-    <v-content>
-      <main>
-        <ViewTasks/>
-      </main>
-    </v-content>
+    <main>
+      <ViewTasks/>
+    </main>
   </v-app>
 </template>
 
