@@ -24,7 +24,7 @@
       <v-spacer></v-spacer>
 
       <v-list
-        v-for="(value, key, index) in taskDetails"
+        v-for="(value, key) in taskDetails"
         :key="key"
         class="d-flex py-0"
       >
@@ -35,7 +35,7 @@
         </v-list-item>
         
         <v-divider
-          v-if="index !== Object.keys(taskDetails).length-1"
+          v-if="key !== 'author'"
           inset
           vertical
         ></v-divider>
