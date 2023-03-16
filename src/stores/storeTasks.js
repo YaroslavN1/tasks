@@ -5,7 +5,6 @@ export const useStoreTasks = defineStore('storeTasks', {
   state: () => ({ 
     tasksList: [],
     currentPage: 1,
-    range: [0, 8],
     elementsOnPage: 8,
     selectedTab: 'All',
     searchByName: ''
@@ -17,7 +16,7 @@ export const useStoreTasks = defineStore('storeTasks', {
         .filter(task => state.searchByName === '' ? state.tasksList : task.name.toLowerCase().includes(state.searchByName.toLowerCase().trim()))
     },
     getPaginatedTasks() {
-      return this.getFilteredTasks.slice(this.range[0], this.range[1])
+      return this.getFilteredTasks.slice((this.currentPage * this.elementsOnPage) - this.elementsOnPage, (this.currentPage * this.elementsOnPage))
     },
     getPaginationLength() {
       return Math.ceil((this.getFilteredTasks.length/this.elementsOnPage))
@@ -32,8 +31,6 @@ export const useStoreTasks = defineStore('storeTasks', {
     },
     setCurrentPage(newPage) {
       this.currentPage = newPage
-      this.range[0] = (this.currentPage * this.elementsOnPage) - this.elementsOnPage
-      this.range[1] = (this.currentPage * this.elementsOnPage)
     }
   }
 })
