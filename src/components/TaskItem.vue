@@ -1,35 +1,35 @@
 <template>
-  <v-card class="mb-4 task-card" flat>
-    <v-list class="d-flex py-0">
+  <v-card class="task-card rounded-lg mb-4" flat>
+    <v-list class="d-flex py-1">
       <v-list
-        width="380px"
-        class="d-flex flex-row"
+        width="30%"
+        class="d-flex flex-row py-0"
       >
-        <v-list-item min-width="130px">
+        <v-list-item width="40%">
           <v-chip
             variant="elevated"
             :color="chipColor()"
             label
-            class="d-flex justify-center category-chip"
+            class="d-flex justify-center category-chip font-weight-bold"
           >
             {{ task.category }}
           </v-chip>
         </v-list-item>
         
         <v-list-item class="pl-2">
-          <p>{{ task.name }}</p>
+          <p class="task-name">{{ task.name }}</p>
         </v-list-item>
       </v-list>
+
+      <v-spacer></v-spacer>
 
       <v-list
         v-for="(value, key, index) in taskDetails"
         :key="key"
-        class="d-flex"
+        class="d-flex py-0"
       >
-        <v-list-item
-          :min-width="index === 0 ? '90' : index === 1 ? '110' : '125'"
-        >
-          <p>{{ formatDetailLabel(key) }}</p>
+        <v-list-item :width="detailCellWidth(index)">
+          <p class="text-disabled detail-label">{{ formatDetailLabel(key) }}</p>
           <p v-if="value !== 'unset'" >{{ value }}</p>
           <v-icon v-else icon="mdi-infinity" size="x-small"></v-icon>
         </v-list-item>
@@ -42,7 +42,7 @@
 
       </v-list>
         
-        <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
       <v-list-item>
         <v-btn
@@ -50,7 +50,7 @@
           variant="plain"
           size="small"
         >
-          <v-icon icon="mdi-close" size="large"></v-icon>
+          <v-icon icon="mdi-close" size="x-large"></v-icon>
         </v-btn>
       </v-list-item>
 
@@ -108,6 +108,23 @@
     }
   }
 
+/* calculating detail cell width */
+
+  const detailCellWidth = (index) => {
+    if (index === 0) {
+      return '90'
+    }
+    else if (index === 1) {
+      return '115'
+    }
+    else if (index === Object.keys(taskDetails).length-1) {
+      return '145'
+    }
+    else {
+      return '125'
+    }
+  }
+
 </script>
 
 <style scoped>
@@ -117,5 +134,11 @@
 .category-chip {
   opacity: .75;
   filter: saturate(1.2);
+}
+.detail-label {
+  font-size: small;
+}
+.task-name {
+  overflow-wrap: break-word;
 }
 </style>
