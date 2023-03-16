@@ -29,7 +29,7 @@
       </v-container>
 
       <TaskItem
-        v-for="task in storeTasks.getPaginatedTasks(selectedTab, searchByName)"
+        v-for="task in storeTasks.getPaginatedTasks"
         :key="task.id"
         :task="task"
       />
@@ -38,7 +38,7 @@
         <v-pagination
           v-model="currentPage"
           @click="storeTasks.setCurrentPage(currentPage)"
-          :length="storeTasks.getPaginationLength(selectedTab, searchByName)"
+          :length="storeTasks.getPaginationLength"
           :total-visible="5"
           variant="outlined"
           density="compact"
@@ -61,17 +61,9 @@
 
   const storeTasks = useStoreTasks()
 
-/* tabs */
+/* import refs for v-model on components */
 
-  const selectedTab = ref('All')
-
-/* search */
-
-  const searchByName = ref('')
-
-/* current page */
-
-  const { currentPage } = storeToRefs(storeTasks)
+  const { currentPage, selectedTab, searchByName } = storeToRefs(storeTasks)
 
 </script>
 

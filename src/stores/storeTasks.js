@@ -7,20 +7,22 @@ export const useStoreTasks = defineStore('storeTasks', {
     idToHide: [],
     currentPage: 1,
     range: [0, 8],
-    elementsOnPage: 8
+    elementsOnPage: 8,
+    selectedTab: 'All',
+    searchByName: ''
   }),
   getters: {
     getFilteredTasks: (state) => {
-      return (category, name) => state.tasksList
+      return state.tasksList
         .filter(task => state.idToHide === [] ? state.tasksList : state.idToHide.every(el => el !== task.id))
-        .filter(task => category === 'All' ? state.tasksList : task.category === category)
-        .filter(task => name === '' ? state.tasksList : task.name.toLowerCase().includes(name.toLowerCase().trim()))
+        .filter(task => state.selectedTab === 'All' ? state.tasksList : task.category === state.selectedTab)
+        .filter(task => state.searchByName === '' ? state.tasksList : task.name.toLowerCase().includes(state.searchByName.toLowerCase().trim()))
     },
     getPaginatedTasks() {
-      return (category, name) => this.getFilteredTasks(category, name).slice(this.range[0], this.range[1])
+      return this.getFilteredTasks.slice(this.range[0], this.range[1])
     },
     getPaginationLength() {
-      return (category, name) => Math.ceil((this.getFilteredTasks(category, name).length/this.elementsOnPage))
+      return Math.ceil((this.getFilteredTasks.length/this.elementsOnPage))
     }
   },
   actions: {
