@@ -46,7 +46,7 @@
 
       <v-list-item>
         <v-btn
-          @click="storeTasks.addIdToHide(task.id)"
+          @click="storeTasks.deleteTask(task.id)"
           variant="plain"
           size="small"
         >
