@@ -8,7 +8,7 @@
         <v-list-item width="40%">
           <v-chip
             variant="elevated"
-            :color="chipColor()"
+            :color="task.category === 'Active' ? 'success' : task.category === 'Pending' ? 'info' : ''"
             label
             class="d-flex justify-center category-chip font-weight-bold"
           >
@@ -92,20 +92,6 @@
     const subString = detail.slice(1)
     detail = firstLetter + subString
     return detail
-  }
-
-/* chip color change */
-
-  const chipColor = () => {
-    if(props.task.category === 'Active') {
-      return 'success'
-    }
-    else if (props.task.category === 'Pending'){
-      return 'info'
-    }
-    else { 
-      return ''
-    }
   }
 
 /* calculating detail cell width */
