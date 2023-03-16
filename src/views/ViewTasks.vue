@@ -4,7 +4,7 @@
         Tasks
       </h2>
 
-      <v-container class="d-flex flex-row justify-space-between px-0 ">
+      <v-container class="d-flex flex-row justify-space-between px-0">
           <v-tabs
             @click="storeTasks.setCurrentPage(1)"
             v-model="selectedTab"
@@ -26,6 +26,7 @@
             v-model="searchByName"
             label="Search by name..."
             variant="outlined"
+            density="comfortable"
           />
       </v-container>
 
@@ -78,6 +79,9 @@
   font-weight: 600;
   letter-spacing: 1;
   text-transform: none;
+  display: flex;
+  align-items: end;
+  padding-bottom: 10px;
 }
 
 </style>

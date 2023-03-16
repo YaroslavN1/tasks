@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-4 task-card rounded-lg" flat>
+  <v-card class="task-card rounded-lg mb-4" flat>
     <v-list class="d-flex py-1">
       <v-list
         width="380px"
