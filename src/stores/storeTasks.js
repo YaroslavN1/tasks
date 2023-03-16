@@ -13,7 +13,6 @@ export const useStoreTasks = defineStore('storeTasks', {
   getters: {
     getFilteredTasks: (state) => {
       return state.tasksList
-        // .filter(task => state.idToHide === [] ? state.tasksList : state.idToHide.every(el => el !== task.id))
         .filter(task => state.selectedTab === 'All' ? state.tasksList : task.category === state.selectedTab)
         .filter(task => state.searchByName === '' ? state.tasksList : task.name.toLowerCase().includes(state.searchByName.toLowerCase().trim()))
     },
