@@ -28,7 +28,7 @@
         :key="key"
         class="d-flex py-0"
       >
-        <v-list-item :width="detailCellWidth(index)">
+        <v-list-item :width="detailCellWidth(key)">
           <p class="text-disabled detail-label">{{ formatDetailLabel(key) }}</p>
           <p v-if="value !== 'unset'" >{{ value }}</p>
           <v-icon v-else icon="mdi-infinity" size="x-small"></v-icon>
@@ -110,15 +110,18 @@
 
 /* calculating detail cell width */
 
-  const detailCellWidth = (index) => {
-    if (index === 0) {
-      return '90'
+  const detailCellWidth = (key) => {
+    if (key === 'type') {
+      return '85'
     }
-    else if (index === 1) {
+    else if (key === 'task_tab') {
       return '115'
     }
-    else if (index === Object.keys(taskDetails).length-1) {
+    else if (key === 'author') {
       return '145'
+    }
+    else if (key === 'responses') {
+      return '100'
     }
     else {
       return '125'
