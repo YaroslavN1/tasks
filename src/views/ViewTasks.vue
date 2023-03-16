@@ -1,21 +1,22 @@
 <template>
     <v-container class="px-0">
-      <div>
+      <h2 class="task-list__title">
         Tasks
-      </div>
+      </h2>
 
-      <v-container class="d-flex flex-row justify-space-between px-0">
+      <v-container class="d-flex flex-row justify-space-between px-0 ">
           <v-tabs
             @click="storeTasks.setCurrentPage(1)"
             v-model="selectedTab"
             color="green-lighten-1"
             align-tabs="start"
+            class="text-medium-emphasis"
             >
           
-            <v-tab class="tab-border" value="All">All</v-tab>
-            <v-tab class="tab-border" value="Active">Active</v-tab>
-            <v-tab class="tab-border" value="Pending">Pending</v-tab>
-            <v-tab class="tab-border" value="Archived">Archived</v-tab>
+            <v-tab class="tab-border tab-category" value="All">All</v-tab>
+            <v-tab class="tab-border tab-category" value="Active">Active</v-tab>
+            <v-tab class="tab-border tab-category" value="Pending">Pending</v-tab>
+            <v-tab class="tab-border tab-category" value="Archived">Archived</v-tab>
           </v-tabs>
 
           <v-spacer></v-spacer>
@@ -52,7 +53,6 @@
 
 /* imports */
 
-  import { ref } from 'vue'
   import { storeToRefs } from 'pinia'
   import { useStoreTasks } from '@/stores/storeTasks'
   import TaskItem from '@/components/TaskItem.vue'
@@ -70,6 +70,14 @@
 <style scoped>
 .tab-border:not(.v-tab--selected) {
   border-bottom: solid lightgrey 2px
+}
+.task-list__title {
+  font-size: 22px;
+}
+.tab-category {
+  font-weight: 600;
+  letter-spacing: 1;
+  text-transform: none;
 }
 
 </style>

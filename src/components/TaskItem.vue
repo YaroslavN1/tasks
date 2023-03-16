@@ -1,16 +1,16 @@
 <template>
-  <v-card class="mb-4 task-card" flat>
-    <v-list class="d-flex py-0">
+  <v-card class="mb-4 task-card rounded-lg" flat>
+    <v-list class="d-flex py-1">
       <v-list
         width="380px"
-        class="d-flex flex-row"
+        class="d-flex flex-row py-0"
       >
         <v-list-item min-width="130px">
           <v-chip
             variant="elevated"
             :color="chipColor()"
             label
-            class="d-flex justify-center category-chip"
+            class="d-flex justify-center category-chip font-weight-bold"
           >
             {{ task.category }}
           </v-chip>
@@ -24,12 +24,12 @@
       <v-list
         v-for="(value, key, index) in taskDetails"
         :key="key"
-        class="d-flex"
+        class="d-flex py-0"
       >
         <v-list-item
           :min-width="index === 0 ? '90' : index === 1 ? '110' : '125'"
         >
-          <p>{{ formatDetailLabel(key) }}</p>
+          <p class="text-disabled detail-label">{{ formatDetailLabel(key) }}</p>
           <p v-if="value !== 'unset'" >{{ value }}</p>
           <v-icon v-else icon="mdi-infinity" size="x-small"></v-icon>
         </v-list-item>
@@ -50,7 +50,7 @@
           variant="plain"
           size="small"
         >
-          <v-icon icon="mdi-close" size="large"></v-icon>
+          <v-icon icon="mdi-close" size="x-large"></v-icon>
         </v-btn>
       </v-list-item>
 
@@ -117,5 +117,8 @@
 .category-chip {
   opacity: .75;
   filter: saturate(1.2);
+}
+.detail-label {
+  font-size: small;
 }
 </style>
