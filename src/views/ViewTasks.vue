@@ -3,7 +3,7 @@
       <h2 class="task-list__title">
         Tasks
       </h2>
-      <div class="d-flex flex-row justify-space-between px-0 mb-2">
+      <div class="d-flex flex-row justify-space-between px-0 mb-6">
         <v-tabs
           @click="storeTasks.setCurrentPage(1)"
           v-model="selectedTab"
@@ -25,6 +25,7 @@
           v-model="searchByName"
           label="Search by name..."
           variant="outlined"
+          hide-details
           density="comfortable"
         />
       </div>
