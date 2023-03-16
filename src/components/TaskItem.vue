@@ -8,7 +8,7 @@
         <v-list-item width="40%">
           <v-chip
             variant="elevated"
-            :color="chipColor()"
+            :color="task.category === 'Active' ? 'success' : task.category === 'Pending' ? 'info' : ''"
             label
             class="d-flex justify-center category-chip font-weight-bold"
           >
@@ -24,18 +24,18 @@
       <v-spacer></v-spacer>
 
       <v-list
-        v-for="(value, key, index) in taskDetails"
+        v-for="(value, key) in taskDetails"
         :key="key"
         class="d-flex py-0"
       >
-        <v-list-item :width="detailCellWidth(index)">
+        <v-list-item :width="detailCellWidth(key)">
           <p class="text-disabled detail-label">{{ formatDetailLabel(key) }}</p>
           <p v-if="value !== 'unset'" >{{ value }}</p>
           <v-icon v-else icon="mdi-infinity" size="x-small"></v-icon>
         </v-list-item>
         
         <v-divider
-          v-if="index !== Object.keys(taskDetails).length-1"
+          v-if="key !== 'author'"
           inset
           vertical
         ></v-divider>
@@ -94,31 +94,20 @@
     return detail
   }
 
-/* chip color change */
-
-  const chipColor = () => {
-    if(props.task.category === 'Active') {
-      return 'success'
-    }
-    else if (props.task.category === 'Pending'){
-      return 'info'
-    }
-    else { 
-      return ''
-    }
-  }
-
 /* calculating detail cell width */
 
-  const detailCellWidth = (index) => {
-    if (index === 0) {
-      return '90'
+  const detailCellWidth = (key) => {
+    if (key === 'type') {
+      return '85'
     }
-    else if (index === 1) {
+    else if (key === 'task_tab') {
       return '115'
     }
-    else if (index === Object.keys(taskDetails).length-1) {
+    else if (key === 'author') {
       return '145'
+    }
+    else if (key === 'responses') {
+      return '100'
     }
     else {
       return '125'
