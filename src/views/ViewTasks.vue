@@ -1,34 +1,33 @@
 <template>
-    <v-container class="px-0">
+    <v-container fluid class="mt-10 tasks-view">
       <h2 class="task-list__title">
         Tasks
       </h2>
+      <div class="d-flex flex-row justify-space-between px-0 mb-2">
+        <v-tabs
+          @click="storeTasks.setCurrentPage(1)"
+          v-model="selectedTab"
+          color="green-lighten-1"
+          align-tabs="start"
+          class="text-medium-emphasis"
+          >
+      
+          <v-tab class="tab-border tab-category" value="All">All</v-tab>
+          <v-tab class="tab-border tab-category" value="Active">Active</v-tab>
+          <v-tab class="tab-border tab-category" value="Pending">Pending</v-tab>
+          <v-tab class="tab-border tab-category" value="Archived">Archived</v-tab>
+        </v-tabs>
 
-      <v-container class="d-flex flex-row justify-space-between px-0">
-          <v-tabs
-            @click="storeTasks.setCurrentPage(1)"
-            v-model="selectedTab"
-            color="green-lighten-1"
-            align-tabs="start"
-            class="text-medium-emphasis"
-            >
-          
-            <v-tab class="tab-border tab-category" value="All">All</v-tab>
-            <v-tab class="tab-border tab-category" value="Active">Active</v-tab>
-            <v-tab class="tab-border tab-category" value="Pending">Pending</v-tab>
-            <v-tab class="tab-border tab-category" value="Archived">Archived</v-tab>
-          </v-tabs>
+        <v-spacer></v-spacer>
 
-          <v-spacer></v-spacer>
-
-          <v-text-field
-            @input="storeTasks.setCurrentPage(1)"
-            v-model="searchByName"
-            label="Search by name..."
-            variant="outlined"
-            density="comfortable"
-          />
-      </v-container>
+        <v-text-field
+          @input="storeTasks.setCurrentPage(1)"
+          v-model="searchByName"
+          label="Search by name..."
+          variant="outlined"
+          density="comfortable"
+        />
+      </div>
 
       <TaskItem
         v-for="task in storeTasks.getPaginatedTasks"
@@ -69,6 +68,11 @@
 </script>
 
 <style scoped>
+
+.tasks-view {
+  max-width: 1320px;
+}
+
 .tab-border:not(.v-tab--selected) {
   border-bottom: solid lightgrey 2px
 }
