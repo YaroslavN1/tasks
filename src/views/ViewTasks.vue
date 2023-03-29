@@ -31,7 +31,7 @@
       </div>
 
       <TaskItem
-        v-for="task in storeTasks.getPaginatedTasks"
+        v-for="task in storeTasks.getPaginatedTasks(currentPage)"
         :key="task.id"
         :task="task"
       />
@@ -39,7 +39,6 @@
       <div class="d-flex justify-end">
         <v-pagination
           v-model="currentPage"
-          @click="storeTasks.setCurrentPage(currentPage)"
           :length="storeTasks.getPaginationLength"
           :total-visible="5"
           variant="outlined"
@@ -54,6 +53,7 @@
 
 /* imports */
 
+  import { ref } from 'vue'
   import { storeToRefs } from 'pinia'
   import { useStoreTasks } from '@/stores/storeTasks'
   import TaskItem from '@/components/TaskItem.vue'
@@ -64,7 +64,8 @@
 
 /* import refs for v-model on components */
 
-  const { currentPage, selectedTab, searchByName } = storeToRefs(storeTasks)
+  const { selectedTab, searchByName } = storeToRefs(storeTasks)
+  const currentPage = ref(1)
 
 </script>
 

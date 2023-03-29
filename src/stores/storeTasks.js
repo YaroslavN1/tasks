@@ -4,7 +4,6 @@ import tasksList from '@/mockdata/tasksList.json'
 export const useStoreTasks = defineStore('storeTasks', {
   state: () => ({ 
     tasksList: [],
-    currentPage: 1,
     elementsOnPage: 8,
     selectedTab: 'All',
     searchByName: ''
@@ -16,7 +15,7 @@ export const useStoreTasks = defineStore('storeTasks', {
         .filter(task => state.searchByName === '' ? state.tasksList : task.name.toLowerCase().includes(state.searchByName.toLowerCase().trim()))
     },
     getPaginatedTasks() {
-      return this.getFilteredTasks.slice((this.currentPage * this.elementsOnPage) - this.elementsOnPage, (this.currentPage * this.elementsOnPage))
+      return (page) => this.getFilteredTasks.slice((page * this.elementsOnPage) - this.elementsOnPage, (page * this.elementsOnPage))
     },
     getPaginationLength() {
       return Math.ceil((this.getFilteredTasks.length/this.elementsOnPage))
@@ -28,9 +27,6 @@ export const useStoreTasks = defineStore('storeTasks', {
     },
     deleteTask(id) {
       this.tasksList.splice(tasksList.findIndex(el => el.id === id), 1)
-    },
-    setCurrentPage(newPage) {
-      this.currentPage = newPage
     }
   }
 })
