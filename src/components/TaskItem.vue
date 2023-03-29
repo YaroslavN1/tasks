@@ -88,12 +88,10 @@
 
 /* formatting details */
 
-  const formatDetailLabel = (string) => {
-    let detail = string.replace(/_/g, " ")
-    const firstLetter = detail.charAt(0).toUpperCase()
-    const subString = detail.slice(1)
-    detail = firstLetter + subString
-    return detail
+  const formatDetailLabel = ([first, ...rest]) => {
+    let upperCase = first.toUpperCase() + rest.join('')
+    upperCase = upperCase.replace(/_/g, " ")
+    return upperCase
   }
 
 /* calculating detail cell width */
@@ -104,9 +102,6 @@
     }
     else if (key === 'task_tab') {
       return '115'
-    }
-    else if (key === 'author') {
-      return '145'
     }
     else if (key === 'responses') {
       return '100'
