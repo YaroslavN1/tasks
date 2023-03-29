@@ -4,22 +4,19 @@ import tasksList from '@/mockdata/tasksList.json'
 export const useStoreTasks = defineStore('storeTasks', {
   state: () => ({ 
     tasksList: [],
-    currentPage: 1,
-    elementsOnPage: 8,
-    selectedTab: 'All',
-    searchByName: ''
+    elementsOnPage: 8
   }),
   getters: {
     getFilteredTasks: (state) => {
-      return state.tasksList
-        .filter(task => state.selectedTab === 'All' ? state.tasksList : task.category === state.selectedTab)
-        .filter(task => state.searchByName === '' ? state.tasksList : task.name.toLowerCase().includes(state.searchByName.toLowerCase().trim()))
+      return (selectedTab, searchedName) => state.tasksList
+        .filter(task => selectedTab === 'All' ? state.tasksList : task.category === selectedTab)
+        .filter(task => searchedName === '' ? state.tasksList : task.name.toLowerCase().includes(searchedName.toLowerCase().trim()))
     },
     getPaginatedTasks() {
-      return this.getFilteredTasks.slice((this.currentPage * this.elementsOnPage) - this.elementsOnPage, (this.currentPage * this.elementsOnPage))
+      return (page, selectedTab, searchedName) => this.getFilteredTasks(selectedTab, searchedName).slice((page * this.elementsOnPage) - this.elementsOnPage, (page * this.elementsOnPage))
     },
     getPaginationLength() {
-      return Math.ceil((this.getFilteredTasks.length/this.elementsOnPage))
+      return (selectedTab, searchedName) => Math.ceil((this.getFilteredTasks(selectedTab, searchedName).length/this.elementsOnPage))
     }
   },
   actions: {
@@ -28,9 +25,6 @@ export const useStoreTasks = defineStore('storeTasks', {
     },
     deleteTask(id) {
       this.tasksList.splice(tasksList.findIndex(el => el.id === id), 1)
-    },
-    setCurrentPage(newPage) {
-      this.currentPage = newPage
     }
   }
 })
