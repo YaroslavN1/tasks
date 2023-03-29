@@ -62,6 +62,7 @@
 
 /* imports */
 
+  import { ref } from 'vue'
   import { useStoreTasks } from '@/stores/storeTasks'
 
 /* stores */
@@ -77,12 +78,13 @@
     }
   })
 
-/* task details separating and formatting */
+/* task details extracting and formatting */
 
-  const taskDetails = Object.fromEntries(Object.entries(props.task).splice(3))
-  
-  taskDetails.responses = `${taskDetails.responses}/${taskDetails.responses_total}`
-  delete taskDetails.responses_total
+  const taskDetailKeys = ref(['type', 'task_tab', 'active_from', 'active_to', 'responses', 'author'])
+
+  const taskDetails = Object.fromEntries(Object.entries(props.task)
+    .map(el => el[0] !== 'responses' ? el : [el[0], `${props.task.responses}/${props.task.responses_total}`])
+    .filter(entry => taskDetailKeys.value.some(key => key === entry[0])))
 
 /* formatting details */
 
@@ -108,6 +110,9 @@
     }
     else if (key === 'responses') {
       return '100'
+    }
+    else if (key === 'author') {
+      return '145'
     }
     else {
       return '125'
