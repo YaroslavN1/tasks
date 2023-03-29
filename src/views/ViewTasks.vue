@@ -5,7 +5,7 @@
       </h2>
       <div class="d-flex flex-row justify-space-between px-0 mb-6">
         <v-tabs
-          @click="storeTasks.setCurrentPage(1)"
+          @click="currentPage = 1"
           v-model="selectedTab"
           color="green-lighten-1"
           align-tabs="start"
@@ -21,7 +21,7 @@
         <v-spacer></v-spacer>
 
         <v-text-field
-          @input="storeTasks.setCurrentPage(1)"
+          @input="currentPage = 1"
           v-model="searchByName"
           label="Search by name..."
           variant="outlined"
@@ -31,7 +31,7 @@
       </div>
 
       <TaskItem
-        v-for="task in storeTasks.getPaginatedTasks(currentPage)"
+        v-for="task in storeTasks.getPaginatedTasks(currentPage, selectedTab, searchByName)"
         :key="task.id"
         :task="task"
       />
@@ -39,7 +39,7 @@
       <div class="d-flex justify-end">
         <v-pagination
           v-model="currentPage"
-          :length="storeTasks.getPaginationLength"
+          :length="storeTasks.getPaginationLength(selectedTab, searchByName)"
           :total-visible="5"
           variant="outlined"
           density="compact"
@@ -54,7 +54,6 @@
 /* imports */
 
   import { ref } from 'vue'
-  import { storeToRefs } from 'pinia'
   import { useStoreTasks } from '@/stores/storeTasks'
   import TaskItem from '@/components/TaskItem.vue'
 
@@ -62,10 +61,11 @@
 
   const storeTasks = useStoreTasks()
 
-/* import refs for v-model on components */
+/* variables for filters and page */
 
-  const { selectedTab, searchByName } = storeToRefs(storeTasks)
   const currentPage = ref(1)
+  const selectedTab = ref('All')
+  const searchByName = ref('')
 
 </script>
 
