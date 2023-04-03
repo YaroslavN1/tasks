@@ -9,8 +9,7 @@ export const useStoreTasks = defineStore('storeTasks', {
   getters: {
     getFilteredTasks: (state) => {
       return (selectedTab, searchedName) => state.tasksList
-        .filter(task => selectedTab === 'All' ? state.tasksList : task.category === selectedTab)
-        .filter(task => searchedName === '' ? state.tasksList : task.name.toLowerCase().includes(searchedName.toLowerCase().trim()))
+        .filter(task => (selectedTab === 'All' ? state.tasksList : task.category === selectedTab) && task.name.toLowerCase().includes(searchedName.toLowerCase().trim()))
     },
     getPaginatedTasks() {
       return (page, selectedTab, searchedName) => this.getFilteredTasks(selectedTab, searchedName).slice((page * this.elementsOnPage) - this.elementsOnPage, (page * this.elementsOnPage))
