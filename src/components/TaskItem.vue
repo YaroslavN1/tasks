@@ -1,25 +1,20 @@
 <template>
   <v-card class="task-card rounded-lg mb-4" flat>
     <v-list class="d-flex py-1">
-      <v-list
-        width="30%"
-        class="d-flex flex-row py-0"
-      >
-        <v-list-item width="40%">
-          <v-chip
-            variant="elevated"
-            :color="task.category === 'Active' ? 'success' : task.category === 'Pending' ? 'info' : ''"
-            label
-            class="d-flex justify-center category-chip font-weight-bold"
-          >
-            {{ task.category }}
-          </v-chip>
-        </v-list-item>
-        
-        <v-list-item class="pl-2">
-          <p class="task-name">{{ task.name }}</p>
-        </v-list-item>
-      </v-list>
+      <v-list-item width="10%" class="py-0">
+        <v-chip
+          variant="elevated"
+          :color="task.category === 'Active' ? 'success' : task.category === 'Pending' ? 'info' : ''"
+          label
+          class="d-flex justify-center category-chip font-weight-bold"
+        >
+          {{ task.category }}
+        </v-chip>
+      </v-list-item>
+      
+      <v-list-item width="20%" class="pl-2 py-0">
+        <p class="task-name">{{ task.name }}</p>
+      </v-list-item>
 
       <v-spacer></v-spacer>
 
