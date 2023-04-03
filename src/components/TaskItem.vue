@@ -4,7 +4,7 @@
       <v-list-item width="10%" class="py-0">
         <v-chip
           variant="elevated"
-          :color="task.category === 'Active' ? 'success' : task.category === 'Pending' ? 'info' : ''"
+          :color="chipColor"
           label
           class="d-flex justify-center category-chip font-weight-bold"
         >
@@ -55,39 +55,37 @@
 
 <script setup>
 
-/* imports */
+import { ref, computed } from 'vue'
+import { useStoreTasks } from '@/stores/storeTasks'
 
-  import { ref } from 'vue'
-  import { useStoreTasks } from '@/stores/storeTasks'
+const storeTasks = useStoreTasks()
 
-/* stores */
-
-  const storeTasks = useStoreTasks()
-
-/* props */
-
-  const props = defineProps({
-    task: {
-    type: Object,
-    required: true
-    }
-  })
-
-/* task details extracting and formatting */
-
-  const taskDetailKeys = ref(['type', 'task_tab', 'active_from', 'active_to', 'responses', 'author'])
-
-  const taskDetails = Object.fromEntries(Object.entries(props.task)
-    .map(el => el[0] !== 'responses' ? el : [el[0], `${props.task.responses}/${props.task.responses_total}`])
-    .filter(entry => taskDetailKeys.value.some(key => key === entry[0])))
-
-/* formatting details */
-
-  const formatDetailLabel = ([first, ...rest]) => {
-    let upperCase = first.toUpperCase() + rest.join('')
-    upperCase = upperCase.replace(/_/g, " ")
-    return upperCase
+const props = defineProps({
+  task: {
+  type: Object,
+  required: true
   }
+})
+
+const chipColor = computed(() => ({
+  Active: 'success',
+  Pending: 'info',
+  Archived: '',
+})[props.task.category])
+
+  /* task details extracting and formatting */
+
+const taskDetailKeys = ref(['type', 'task_tab', 'active_from', 'active_to', 'responses', 'author'])
+
+const taskDetails = Object.fromEntries(Object.entries(props.task)
+  .map(el => el[0] !== 'responses' ? el : [el[0], `${props.task.responses}/${props.task.responses_total}`])
+  .filter(entry => taskDetailKeys.value.some(key => key === entry[0])))
+
+const formatDetailLabel = ([first, ...rest]) => {
+  let upperCase = first.toUpperCase() + rest.join('')
+  upperCase = upperCase.replace(/_/g, " ")
+  return upperCase
+}
 
 /* calculating detail cell width */
 
