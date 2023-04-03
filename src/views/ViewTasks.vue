@@ -5,17 +5,20 @@
       </h2>
       <div class="d-flex flex-row justify-space-between px-0 mb-6">
         <v-tabs
-          @click="currentPage = 1"
           v-model="selectedTab"
           color="green-lighten-1"
           align-tabs="start"
           class="text-medium-emphasis"
           >
-      
-          <v-tab class="tab-border tab-category" value="All">All</v-tab>
-          <v-tab class="tab-border tab-category" value="Active">Active</v-tab>
-          <v-tab class="tab-border tab-category" value="Pending">Pending</v-tab>
-          <v-tab class="tab-border tab-category" value="Archived">Archived</v-tab>
+            <v-tab
+              @click="currentPage = 1"
+              v-for="tab in tabs"
+              :key="tab"
+              class="tab-border tab-category"
+              :value="tab"
+            >
+              {{ tab }}
+            </v-tab>
         </v-tabs>
 
         <v-spacer></v-spacer>
@@ -55,21 +58,18 @@
 
 <script setup>
 
-/* imports */
 
-  import { ref } from 'vue'
-  import { useStoreTasks } from '@/stores/storeTasks'
-  import TaskRow from '@/components/TaskRow.vue'
+import { ref } from 'vue'
+import { useStoreTasks } from '@/stores/storeTasks'
+import TaskRow from '@/components/TaskRow.vue'
 
-/* stores */
+const storeTasks = useStoreTasks()
 
-  const storeTasks = useStoreTasks()
+const tabs = ref(['All', 'Active', 'Pending', 'Archived'])
 
-/* variables for filters and page */
-
-  const currentPage = ref(1)
-  const selectedTab = ref('All')
-  const searchByName = ref('')
+const currentPage = ref(1)
+const selectedTab = ref('All')
+const searchByName = ref('')
 
 </script>
 
@@ -79,8 +79,6 @@
   border-spacing: 0 15px !important;
 }
 
-
-
 .tasks-view {
   max-width: 1320px;
 }
@@ -88,9 +86,11 @@
 .tab-border:not(.v-tab--selected) {
   border-bottom: solid lightgrey 2px
 }
+
 .task-list__title {
   font-size: 22px;
 }
+
 .tab-category {
   font-weight: 600;
   letter-spacing: 1;
