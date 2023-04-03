@@ -7,23 +7,12 @@
 </template>
 
 <script setup>
-/*
-  imports
-*/
 
-  import {useStoreTasks} from '@/stores/storeTasks'
-  import ViewTasks from '@/views/ViewTasks.vue'
+import {useStoreTasks} from '@/stores/storeTasks'
+import ViewTasks from '@/views/ViewTasks.vue'
 
-/*
-  stores
-*/
+const storeTasks = useStoreTasks()
 
-  const storeTasks = useStoreTasks()
-
-/*
-  load tasks to store
-*/
-
-  storeTasks.init()
+storeTasks.init()
 
 </script>
