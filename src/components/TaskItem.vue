@@ -76,11 +76,11 @@ const chipColor = computed(() => ({
   /* task details extracting and formatting */
 
 const taskDetailKeys = ref(['type', 'task_tab', 'active_from', 'active_to', 'responses', 'author'])
-
-const taskDetails = Object.fromEntries(Object.entries(props.task)
-  .map(el => el[0] !== 'responses' ? el : [el[0], `${props.task.responses}/${props.task.responses_total}`])
-  .filter(entry => taskDetailKeys.value.some(key => key === entry[0])))
-
+const taskDetails = computed(() => {
+  return Object.fromEntries(Object.entries(props.task)
+    .map(el => el[0] !== 'responses' ? el : [el[0], `${props.task.responses}/${props.task.responses_total}`])
+    .filter(entry => taskDetailKeys.value.some(key => key === entry[0])))
+})
 const formatDetailLabel = ([first, ...rest]) => {
   let upperCase = first.toUpperCase() + rest.join('')
   upperCase = upperCase.replace(/_/g, " ")
