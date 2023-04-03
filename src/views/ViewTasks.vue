@@ -30,11 +30,15 @@
         />
       </div>
 
-      <TaskItem
-        v-for="task in storeTasks.getPaginatedTasks(currentPage, selectedTab, searchByName)"
-        :key="task.id"
-        :task="task"
-      />
+      <v-table class="task-table">
+        <tbody>
+            <TaskRow
+              v-for="task in storeTasks.getPaginatedTasks(currentPage, selectedTab, searchByName)"
+              :key="task.id"
+              :task="task"
+            />
+        </tbody>
+      </v-table>
 
       <div class="d-flex justify-end">
         <v-pagination
@@ -55,7 +59,7 @@
 
   import { ref } from 'vue'
   import { useStoreTasks } from '@/stores/storeTasks'
-  import TaskItem from '@/components/TaskItem.vue'
+  import TaskRow from '@/components/TaskRow.vue'
 
 /* stores */
 
@@ -69,7 +73,13 @@
 
 </script>
 
-<style scoped>
+<style>
+
+.task-table table {
+  border-spacing: 0 15px !important;
+}
+
+
 
 .tasks-view {
   max-width: 1320px;
@@ -88,6 +98,10 @@
   display: flex;
   align-items: end;
   padding-bottom: 10px;
+}
+
+.task-table .v-table__wrapper {
+  overflow: visible;
 }
 
 </style>
